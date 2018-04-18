@@ -90,14 +90,10 @@ public class LoaderSTL extends Application {
     return perspectiveCamera;
   }
 
-@Override
-public void start(Stage arg0) throws Exception {
-	// TODO Auto-generated method stub
-	
-}
+
 
   //@Override
- /* public void start(Stage primaryStage) {
+  public void start(Stage primaryStage) {
 	String MESH_FILENAME = "C:/Users/eleilbe/Documents/cube2.stl";
     Group group = buildScene(MESH_FILENAME);
     group.setScaleX(2);
@@ -117,5 +113,5 @@ public void start(Stage arg0) throws Exception {
   public static void main(String[] args) {
     System.setProperty("prism.dirtyopts", "false");
     launch(args);
-  }*/
+  }
 }

@@ -1,16 +1,22 @@
 package application;
 
+import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.TextField;
 import java.io.File;
 
 import javax.swing.JFileChooser;
+import javax.swing.JPanel;
 
+import javafx.application.Application;
 import javafx.application.Platform;
+import javafx.embed.swing.SwingNode;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.geometry.Bounds;
 import javafx.scene.Group;
 import javafx.scene.Node;
+import javafx.scene.PerspectiveCamera;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -24,6 +30,7 @@ import javafx.scene.control.MenuBar;
 import javafx.scene.control.MenuItem;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.RadioMenuItem;
+import javafx.scene.control.ScrollPane;
 import javafx.scene.control.Tab;
 import javafx.scene.control.TabPane;
 import javafx.scene.control.ToggleGroup;
@@ -31,6 +38,7 @@ import javafx.scene.layout.AnchorPane;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.BorderPaneBuilder;
 import javafx.scene.layout.GridPane;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
 import javafx.stage.FileChooser;
@@ -40,7 +48,7 @@ import javafx.stage.PopupWindow;
 import javafx.stage.Stage;
 import javafx.stage.Window;
 
-public class corePyxController {
+public class corePyxController  extends Application{
 
     @FXML
     private Menu menuNavigation;
@@ -170,6 +178,9 @@ public class corePyxController {
 
     @FXML
     private Menu menuHelp;
+    
+    @FXML
+    private Pane canvasQuery2;
 
     
     /*Start the actions*/
@@ -180,17 +191,25 @@ public class corePyxController {
     ToggleGroup toggleGroupSimilarity = new ToggleGroup();
     
     @FXML
-    void openFile(ActionEvent event) {
+    void openFile(ActionEvent event)  {
     	
-    	Stage stage = null;
-    	final int VIEWPORT_SIZE = 800;
-    	FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(".STL files (*.stl)", "*.stl");
+    	final SwingNode swingNode = new SwingNode();
+    	/*FileChooser.ExtensionFilter extFilter = new FileChooser.ExtensionFilter(".STL files (*.stl)", "*.stl");
     	fileChooser.setTitle("Open 3D Object");
     	fileChooser.setInitialDirectory(new File(System.getProperty("user.home")));
         fileChooser.getExtensionFilters().add(extFilter);
-    	File object = fileChooser.showOpenDialog(null);
+    	File object = fileChooser.showOpenDialog(null);*/
+    	JPanel panel = new JPanel();       
+        panel.setLayout(new BorderLayout());
+        panel.setPreferredSize(new Dimension(450, 450));
+        panel.add(new BallPanel(), BorderLayout.CENTER);
+        swingNode.setContent(panel);
+        canvasQuery2.getChildren().add(swingNode);
+
     	
-    	LoaderSTL loader = new LoaderSTL();
+   
+    	/*LoaderSTL loader = new LoaderSTL();
+    	final int VIEWPORT_SIZE = 800;
     	String MESH_FILENAME = object.getAbsolutePath();
         canvasQuery = loader.buildScene(MESH_FILENAME);
         canvasQuery.setScaleX(2);
@@ -201,14 +220,30 @@ public class corePyxController {
 
         Scene scene = new Scene(canvasQuery, VIEWPORT_SIZE, VIEWPORT_SIZE, true);
         scene.setFill(Color.rgb(10, 10, 40));
-        loader.addCamera(scene);
-        stage.setScene(scene);
-        stage.show();
-       
-        //canvasQuery.getChildren().add(canvasQuery);
+         addCamera(scene);*/
+
+        // canvasQuery2.setViewportBounds(value);;
+        // primaryStage.show();
+      }
     
-    }
-    @FXML
+    	
+       
+        
+
+ 
+
+	private PerspectiveCamera addCamera(Scene scene) {
+		PerspectiveCamera perspectiveCamera = new PerspectiveCamera();
+	    System.out.println("Near Clip: " + perspectiveCamera.getNearClip());
+	    System.out.println("Far Clip:  " + perspectiveCamera.getFarClip());
+	    System.out.println("FOV:       " + perspectiveCamera.getFieldOfView());
+
+	    scene.setCamera(perspectiveCamera);
+	    return perspectiveCamera;
+		
+	}
+
+	@FXML
     void closeFile(ActionEvent event) {
     	Platform.exit();
         System.exit(0);
@@ -309,5 +344,17 @@ public class corePyxController {
     void executeQuery(ActionEvent event) {
 
     }
+
+
+
+
+
+
+
+	@Override
+	public void start(Stage arg0) throws Exception {
+		// TODO Auto-generated method stub
+		
+	}
 
 }

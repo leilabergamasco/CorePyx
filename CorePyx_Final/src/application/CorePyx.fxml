@@ -40,7 +40,7 @@
             <content>
               <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
                      <children>
-                        <Group fx:id="canvasQuery" layoutX="311.0" layoutY="135.0" />
+                        <Pane fx:id="canvasQuery2" layoutX="218.0" layoutY="52.0" prefHeight="230.0" prefWidth="242.0" />
                      </children>
                   </AnchorPane>
             </content>
