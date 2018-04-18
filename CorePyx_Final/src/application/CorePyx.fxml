@@ -1,0 +1,190 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.*?>
+<?import javafx.scene.chart.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.canvas.*?>
+<?import java.lang.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<AnchorPane fx:id="pPrincipal" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="403.0" prefWidth="678.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.corePyxController">
+   <children>
+      <MenuBar fx:id="menuPrincipal" layoutX="1.0" prefHeight="31.0" prefWidth="678.0">
+        <menus>
+          <Menu fx:id="menuFile" mnemonicParsing="false" text="File">
+            <items>
+              <MenuItem fx:id="menuFileOpen" mnemonicParsing="false" onAction="#openFile" text="Open 3D object" />
+                  <SeparatorMenuItem mnemonicParsing="false" />
+                  <MenuItem fx:id="menuFileClose" mnemonicParsing="false" onAction="#closeFile" text="Exit" />
+            </items>
+          </Menu>
+          <Menu fx:id="menuNavigation" mnemonicParsing="false" text="Navigation">
+               <items>
+                  <RadioMenuItem fx:id="menuNavigationAuto" mnemonicParsing="false" onAction="#selectAuto" text="Automatic mode" />
+                  <RadioMenuItem fx:id="menuNavigationSemi" mnemonicParsing="false" onAction="#selectSemi" text="Semi-automatic mode" />
+                  <RadioMenuItem fx:id="menuNavigationTester" mnemonicParsing="false" onAction="#selectTester" text="Tester mode" />
+               </items>
+          </Menu>
+          <Menu fx:id="menuHelp" mnemonicParsing="false" text="Help">
+            <items>
+              <MenuItem fx:id="menuHelpAbout" mnemonicParsing="false" onAction="#openAbout" text="About" />
+            </items>
+          </Menu>
+        </menus>
+      </MenuBar>
+      <TabPane fx:id="tabPrincipal" layoutY="28.0" prefHeight="370.0" prefWidth="678.0" tabClosingPolicy="UNAVAILABLE">
+        <tabs>
+          <Tab fx:id="tabVer3D" text="3D Left Ventricle Visualization">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="180.0" prefWidth="200.0">
+                     <children>
+                        <Group fx:id="canvasQuery" layoutX="311.0" layoutY="135.0" />
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+          <Tab fx:id="tabRegion" text="Region Selection">
+            <content>
+              <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="342.0" prefWidth="715.0">
+                     <children>
+                        <Button fx:id="tabRegionSave" layoutX="122.0" layoutY="138.0" mnemonicParsing="false" onAction="#saveRegion" text="Save" />
+                        <Label contentDisplay="CENTER" layoutX="14.0" layoutY="21.0" text="Choose in one or more regions to be processed:" textAlignment="CENTER">
+                           <font>
+                              <Font size="13.0" />
+                           </font></Label>
+                        <GridPane fx:id="tabRegionGrid" alignment="CENTER" layoutX="46.0" layoutY="55.0" prefHeight="65.0" prefWidth="192.0">
+                          <columnConstraints>
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="94.0" minWidth="10.0" prefWidth="50.0" />
+                            <ColumnConstraints hgrow="SOMETIMES" maxWidth="149.0" minWidth="10.0" prefWidth="50.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" maxWidth="197.0" minWidth="10.0" prefWidth="50.0" />
+                              <ColumnConstraints hgrow="SOMETIMES" minWidth="10.0" prefWidth="50.0" />
+                          </columnConstraints>
+                          <rowConstraints>
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                            <RowConstraints minHeight="10.0" prefHeight="30.0" vgrow="SOMETIMES" />
+                          </rowConstraints>
+                           <children>
+                              <CheckBox fx:id="tabRegionCheck3" alignment="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" text="3" GridPane.columnIndex="1" />
+                              <CheckBox fx:id="tabRegionCheck4" alignment="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="38.0" text="4" GridPane.columnIndex="1" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="tabRegionCheck2" alignment="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" text="2" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="tabRegionCheck1" alignment="CENTER" mnemonicParsing="false" prefHeight="17.0" prefWidth="40.0" text="1" />
+                              <CheckBox fx:id="tabRegionCheck5" mnemonicParsing="false" prefHeight="17.0" prefWidth="35.0" text="5" GridPane.columnIndex="2" />
+                              <CheckBox fx:id="tabRegionCheck6" mnemonicParsing="false" prefHeight="17.0" prefWidth="36.0" text="6" GridPane.columnIndex="2" GridPane.rowIndex="1" />
+                              <CheckBox fx:id="tabRegionCheck7" mnemonicParsing="false" prefHeight="17.0" prefWidth="34.0" text="7" GridPane.columnIndex="3" />
+                              <CheckBox fx:id="tabRegionCheck8" mnemonicParsing="false" prefHeight="17.0" prefWidth="35.0" text="8" GridPane.columnIndex="3" GridPane.rowIndex="1" />
+                           </children>
+                        </GridPane>
+                        <ImageView fitHeight="143.0" fitWidth="201.0" layoutX="291.0" layoutY="39.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@basal.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="119.0" fitWidth="164.0" layoutX="319.0" layoutY="202.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@apical.jpg" />
+                           </image>
+                        </ImageView>
+                        <Label contentDisplay="CENTER" layoutX="407.0" layoutY="21.0" text="Left ventricle regions - Legend" textAlignment="CENTER">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <ImageView fitHeight="145.0" fitWidth="119.0" layoutX="528.0" layoutY="41.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@fronLV.jpg" />
+                           </image>
+                        </ImageView>
+                        <ImageView fitHeight="144.0" fitWidth="111.0" layoutX="532.0" layoutY="189.0" pickOnBounds="true" preserveRatio="true">
+                           <image>
+                              <Image url="@backLV.jpg" />
+                           </image>
+                        </ImageView>
+                     </children>
+                  </AnchorPane>
+            </content>
+          </Tab>
+            <Tab fx:id="tabDescriptor" text="Descriptor Selection">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="537.0">
+                     <children>
+                        <Label contentDisplay="CENTER" layoutX="217.0" layoutY="14.0" text="Choose one of the descriptors listed below:" textAlignment="CENTER">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="tabDescriptorHough" layoutX="395.0" layoutY="58.0" mnemonicParsing="false" onAction="#selectHough" text="3D Hough Descriptor" />
+                        <RadioButton fx:id="tabDescriptorSpharm" layoutX="153.0" layoutY="58.0" mnemonicParsing="false" onAction="#selectSphaprm" text="Spherical Harmonics" />
+                        <Button fx:id="tabDescriptorSave" layoutX="298.0" layoutY="109.0" mnemonicParsing="false" onAction="#saveDescriptor" text="Save" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabSimilarity" text="Similarity function Selection">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="537.0">
+                     <children>
+                        <Label contentDisplay="CENTER" layoutX="202.0" layoutY="14.0" text="Choose one of the similarity functions listed below:" textAlignment="CENTER">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <RadioButton fx:id="tabSimilarityEuclidean" layoutX="121.0" layoutY="62.0" mnemonicParsing="false" onAction="#selectEuclidean" text="Euclidean Distance" />
+                        <RadioButton fx:id="tabSimilarityFord" layoutX="421.0" layoutY="62.0" mnemonicParsing="false" onAction="#selectFord" text="Ford-Fulkerson" />
+                        <Button fx:id="tabSimilaritySave" layoutX="306.0" layoutY="103.0" mnemonicParsing="false" onAction="#saveSimilarity" text="Save" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabResults" text="Results">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="537.0">
+                     <children>
+                        <Label layoutX="230.0" layoutY="14.0" text="Find similar examinations">
+                           <font>
+                              <Font size="13.0" />
+                           </font>
+                        </Label>
+                        <Canvas fx:id="tabResultsCanvas1" height="200.0" layoutX="14.0" layoutY="71.0" width="200.0" />
+                        <Canvas fx:id="tabResultsCavas2" height="200.0" layoutX="230.0" layoutY="71.0" width="200.0" />
+                        <Canvas fx:id="tabResultsCanvas3" height="200.0" layoutX="450.0" layoutY="71.0" width="200.0" />
+                        <Label layoutX="100.0" layoutY="45.0" text="#1">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="322.0" layoutY="45.0" text="#2">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Label layoutX="550.0" layoutY="45.0" text="#3">
+                           <font>
+                              <Font name="System Bold" size="13.0" />
+                           </font>
+                        </Label>
+                        <Button fx:id="tabResultsInfo1" layoutX="53.0" layoutY="300.0" mnemonicParsing="false" onAction="#openInfo1" text="More information" />
+                        <Button fx:id="tabResultsInfo2" layoutX="275.0" layoutY="300.0" mnemonicParsing="false" onAction="#openInfo2" text="More information" />
+                        <Button fx:id="tabResultsInfo3" layoutX="503.0" layoutY="300.0" mnemonicParsing="false" onAction="#openInfo3" text="More information" />
+                        <Button fx:id="tabResultsGo" layoutX="385.0" layoutY="11.0" mnemonicParsing="false" onAction="#executeQuery" text="Go!" />
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+            <Tab fx:id="tabStatistics" text="Statistics">
+               <content>
+                  <AnchorPane minHeight="0.0" minWidth="0.0" prefHeight="340.0" prefWidth="737.0">
+                     <children>
+                        <StackedBarChart fx:id="graphic1" layoutX="167.0" layoutY="53.0" prefHeight="221.0" prefWidth="407.0">
+                          <xAxis>
+                            <CategoryAxis side="BOTTOM" />
+                          </xAxis>
+                          <yAxis>
+                            <NumberAxis side="LEFT" />
+                          </yAxis>
+                        </StackedBarChart>
+                     </children></AnchorPane>
+               </content>
+            </Tab>
+        </tabs>
+      </TabPane>
+   </children>
+</AnchorPane>
